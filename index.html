@@ -111,26 +111,35 @@
         }
         .s {
             height: 10px;
+            width: 10px;
+            margin-right: 15px;
         }
         #tabpe {
             display: flex;
             flex-direction: column;
-            overflow-x: auto;
+            overflow: auto;
         }
         #intro {
             display: flex;
             flex-direction: column;
         }
         #table {
-            max-width: 90%;
-            overflow-x: auto;
+            max-width: 95%;
+            max-height: 95%;
+            overflow: auto;
         }
         #table-legend {
-            position: absolute;
-            top: 5%;
-            left: 25%;
+            position: fixed;
+            left: 10%;
             padding: 3px;
             color: aqua;
+            border: 1px solid #0004ff;
+            max-width: 150px;
+            max-height: 200px;
+            overflow: auto;
+        }
+        #legendbtn {
+            padding: 3px;
         }
     </style>
     <script defer>
@@ -139,6 +148,7 @@
             var search = false
             var searchr = false
             var about = false
+            var legend = false
 
             window.aboutf = function() {
                 about = !(about)
@@ -312,8 +322,18 @@
                     document.querySelector('#searchr').classList.remove('visible')
                 }
             }
+            window.legendf = function() {
+                legend = !(legend)
+                if (legend) {
+                    document.querySelector('#table-legend').classList.add('visible')
+                    document.querySelector('#table-legend').classList.remove('hidden')
+                }
+                else {
+                    document.querySelector('#table-legend').classList.add('hidden')
+                    document.querySelector('#table-legend').classList.remove('visible')
+                }
+            }
         })
-        
     </script>
 </head>
 <body>
@@ -326,37 +346,45 @@
     </div>
     <div id="table" class="hidden window">
         <div id="tabpe">
-            <fieldset id="table-legend">
-                <legend>&ThickSpace;Legenda&ThickSpace;</legend>
+            <div id="table-legend" class="hidden">
                 <table>
                     <tbody>
                         <tr>
-                            <td class="alcamet">Metais alcalinos</td>
-                            <td class="semimet">Semimetais</td>
-                        </tr>
-                        <tr>
-                            <td class="alcatermet">" alcalinoterrosos</td>
-                            <td class="nomet">Não metais</td>
-                        </tr>
-                        <tr>
-                            <td class="outmet">Outros metais</td>
-                            <td class="halo">Halogênios</td>
-                        </tr>
-                        <tr>
-                            <td class="transmet">Metais de transição</td>
                             <td class="noble">Gases nobres</td>
                         </tr>
                         <tr>
-                            <td class="lanta">Lantanídeos</td>
-                            <td class="unknown">Propriedades desconhecidas</td>
+                            <td class="alcamet">Metais alcalinos</td>
+                        </tr>
+                        <tr>
+                            <td class="alcatermet">Metais alcalinoterrosos</td>
+                        </tr>
+                        <tr>
+                            <td class="nomet">Não metais</td>
+                        </tr>
+                        <tr>
+                            <td class="semimet">Semimetais</td>
+                        </tr>
+                        <tr>
+                            <td class="outmet">Outros metais</td>
+                        </tr>
+                        <tr>
+                            <td class="transmet">Metais de transição</td>
+                        </tr>
+                        <tr>
+                            <td class="halo">Halogênios</td>
                         </tr>
                         <tr>
                             <td class="actin">Actinídeos</td>
-                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="lanta">Lantanídeos</td>
+                        </tr>
+                        <tr>
+                            <td class="unknown">Propriedades desconhecidas</td>
                         </tr>
                     </tbody>
                 </table>
-            </fieldset>
+            </div>
             <div class="col">
                 <div class="element nomet">
                     <sup class="number"><h5>1<h5></sup>
@@ -1130,6 +1158,8 @@
         </div>
         <br>
         <button onclick="tablef()">Voltar</button>
+        <span class="s"></span>
+        <button id="legendbtn" onclick="legendf()">Legenda</button>
     </div>
     <div id="search" class="hidden window">
         <input id="name" type="text" placeholder="Nome do elemento"><br>
